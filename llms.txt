@@ -1,0 +1,392 @@
+TITLE: Divio Documentation System 4-Quadrant Structure
+DESCRIPTION: Core framework organizing documentation into 4 separate types
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Documentation Framework
+CODE:
+Learning (Do this)     |  Problem-Solving (Fix this)
+   TUTORIALS          |     HOW-TO GUIDES  
+  Step-by-step        |    Specific solutions
+                      |
+Understanding (Why)    |  Reference (Look this up)
+   EXPLANATION        |      REFERENCE
+  Context & design    |    Technical specs
+
+Rule: Never mix these types in the same document.
+
+---
+
+TITLE: Tutorial Template and Structure
+DESCRIPTION: Step-by-step template for beginner-focused learning documentation
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Template
+CODE:
+# Tutorial: [Clear outcome - "Build your first API"]
+
+## What you'll build
+[Describe the end result - be specific and motivating]
+
+## Prerequisites  
+- [List exactly what they need to know/have installed]
+
+## Step 1: [Action verb - "Set up the project"]
+[Exact commands/actions - no explanation of why]
+
+## Step 2: [Next action]
+[Continue building toward the goal]
+
+## What's next
+[Point to relevant how-to guides or explanations]
+
+Tutorial Checklist:
+- [ ] Can a complete beginner follow this?
+- [ ] Does every step produce a visible result?
+- [ ] Does it work every time?
+- [ ] Does it build something meaningful?
+- [ ] Are explanations minimal?
+
+---
+
+TITLE: Tutorial Code Example - JavaScript To-Do App
+DESCRIPTION: Complete tutorial example showing step-by-step implementation
+SOURCE: divio-documentation-system.txt
+LANGUAGE: JavaScript
+CODE:
+// Tutorial: Build a To-Do App with JavaScript
+
+// Step 1: Create the HTML structure
+// Add this to your index.html:
+<div id="app">
+  <input id="todo-input" placeholder="Add a task">
+  <button id="add-btn">Add</button>
+  <ul id="todo-list"></ul>
+</div>
+
+// Step 2: Add basic functionality
+// Add this to your script.js:
+const input = document.getElementById('todo-input');
+const button = document.getElementById('add-btn');
+const list = document.getElementById('todo-list');
+
+button.addEventListener('click', function() {
+  const li = document.createElement('li');
+  li.textContent = input.value;
+  list.appendChild(li);
+  input.value = '';
+});
+
+// Result: You now have a working to-do app
+
+---
+
+TITLE: How-to Guide Template and Structure  
+DESCRIPTION: Problem-solving template for experienced users
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Template
+CODE:
+# How to [Specific task]
+
+## Problem
+[What specific issue this solves]
+
+## Prerequisites
+[Assume some knowledge - link to tutorials if needed]
+
+## Solution
+1. [Step with some flexibility]
+2. [Alternative approaches when relevant]
+3. [Expected outcome]
+
+## Variations
+[How to adapt for different scenarios]
+
+## Troubleshooting
+[Common issues and fixes]
+
+Good How-to Titles:
+- "How to add authentication to your API"
+- "How to optimize your database queries"
+- "How to handle file uploads"
+
+Bad How-to Titles:
+- "Authentication" (too broad)
+- "Getting started with authentication" (that's a tutorial)
+- "Why you need authentication" (that's explanation)
+
+---
+
+TITLE: How-to Code Example - API Error Handling
+DESCRIPTION: Practical example showing error handling implementation
+SOURCE: divio-documentation-system.txt
+LANGUAGE: JavaScript
+CODE:
+// How to: Add Error Handling to API Calls
+
+// Problem: API calls can fail, causing your app to break
+
+// Solution 1: Using try/catch with async/await
+async function fetchUserData(userId) {
+  try {
+    const response = await fetch(`/api/users/${userId}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null; // Or handle error appropriately
+  }
+}
+
+// Solution 2: Using .catch() with promises
+function fetchUserData(userId) {
+  return fetch(`/api/users/${userId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error('Failed to fetch user:', error);
+      return null;
+    });
+}
+
+// Usage in your app:
+const userData = await fetchUserData(123);
+if (userData) {
+  // Success case
+  displayUser(userData);
+} else {
+  // Error case
+  showErrorMessage('User not found');
+}
+
+---
+
+TITLE: Reference Documentation Template
+DESCRIPTION: Technical lookup information template with structured format
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Template
+CODE:
+# [API/Function/Component] Reference
+
+## Overview
+[Brief description of what this is]
+
+## Parameters
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| param1 | string | Yes | Description |
+
+## Methods/Properties
+### method1(param)
+**Description:** [What it does]
+**Parameters:** [Details]
+**Returns:** [What it returns]
+**Example:** [Basic usage example]
+
+## Examples
+[Minimal usage examples only - no tutorials]
+
+Good Reference Sections:
+- "API Endpoints"
+- "Configuration Options"
+- "Function Reference"
+- "Component Props"
+
+---
+
+TITLE: Reference Code Example - User Management API
+DESCRIPTION: Complete API reference documentation example
+SOURCE: divio-documentation-system.txt
+LANGUAGE: JavaScript
+CODE:
+// API Reference: User Management
+
+// GET /api/users
+// Description: Retrieve all users
+// Parameters: 
+//   - page (optional): Page number, default 1
+//   - limit (optional): Items per page, default 10
+// Returns: Array of user objects
+// Example: fetch('/api/users?page=2&limit=20')
+
+// POST /api/users
+// Description: Create a new user
+// Body: { name: string, email: string, role?: string }
+// Returns: Created user object with ID
+// Example: 
+fetch('/api/users', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: 'John', email: 'john@example.com' })
+})
+
+// User Object Schema
+{
+  id: number,           // Unique identifier
+  name: string,         // Full name
+  email: string,        // Email address (unique)
+  role: string,         // 'admin' | 'user' | 'guest'
+  createdAt: string,    // ISO 8601 timestamp
+  updatedAt: string     // ISO 8601 timestamp
+}
+
+---
+
+TITLE: Explanation Documentation Template
+DESCRIPTION: Understanding-oriented template for design decisions and context
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Template
+CODE:
+# Understanding [Concept/Decision]
+
+## Background
+[Why this topic matters]
+
+## The Problem
+[What challenge this addresses]
+
+## Our Approach
+[How we solved it and why]
+
+## Alternatives
+[Other approaches we considered]
+
+## Trade-offs
+[What we gained/lost with our decision]
+
+## When to Use
+[Guidance on when this applies]
+
+Good Explanation Topics:
+- "Why we chose REST over GraphQL"
+- "Understanding our database design"
+- "Architecture decisions"
+- "Security considerations"
+
+---
+
+TITLE: Project Structure for Small Projects
+DESCRIPTION: Recommended folder structure for organizing documentation
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Directory Structure
+CODE:
+docs/
+├── README.md              # Project overview + quick tutorial
+├── tutorials/
+│   ├── getting-started.md # Your main tutorial
+│   └── advanced-setup.md  # Optional: next-level tutorial
+├── how-to/
+│   ├── deployment.md      # Common tasks
+│   ├── configuration.md
+│   └── troubleshooting.md
+├── reference/
+│   ├── api.md            # Technical specs
+│   └── config-options.md
+└── explanation/
+    ├── architecture.md    # Why decisions
+    └── design-principles.md
+
+---
+
+TITLE: Project Structure for Medium Projects
+DESCRIPTION: Expanded folder structure for growing projects
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Directory Structure
+CODE:
+docs/
+├── index.md               # Documentation home
+├── getting-started/       # Tutorials section
+│   ├── quick-start.md
+│   ├── installation.md
+│   └── first-project.md
+├── guides/               # How-to guides
+│   ├── deployment/
+│   ├── integration/
+│   └── troubleshooting/
+├── reference/            # Reference docs
+│   ├── api/
+│   ├── cli/
+│   └── configuration/
+└── concepts/             # Explanations
+    ├── architecture.md
+    ├── design-decisions.md
+    └── best-practices.md
+
+---
+
+TITLE: 3-Phase Implementation Guide
+DESCRIPTION: Step-by-step approach to implementing the documentation system
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Implementation Guide
+CODE:
+## Phase 1: Audit Your Docs (30 minutes)
+1. List all your current documentation
+2. Categorize each piece into the 4 types
+3. Identify gaps and overlaps
+
+## Phase 2: Quick Wins (1-2 hours)
+1. Write 1 simple tutorial for your main use case
+2. Create a basic reference for your API/main functions
+3. Split any mixed-type documents
+
+## Phase 3: Build Out (ongoing)
+1. Add how-to guides for common problems
+2. Write explanations for complex decisions
+3. Keep tutorials updated and working
+
+Success Metrics:
+- Tutorial completion rate >80%
+- Problem resolution through how-to guides
+- Fast information lookup via reference
+- Better team understanding from explanations
+
+---
+
+TITLE: Common Documentation Mistakes to Avoid
+DESCRIPTION: Examples of mixed-type documents and how to separate them
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Best Practices
+CODE:
+❌ Mixed-Type Documents
+Bad: "User Authentication Guide"
+- What authentication is (explanation)
+- How to set up auth (tutorial)
+- Login API reference (reference)  
+- Troubleshooting auth (how-to)
+
+✅ Separate Documents
+Good: 4 separate documents
+- Tutorial: "Add authentication to your app"
+- How-to: "Fix common auth problems"
+- Reference: "Authentication API"
+- Explanation: "Why we chose JWT authentication"
+
+Other Common Mistakes:
+❌ Tutorials that don't work
+❌ How-to guides that start from zero
+❌ Reference docs with opinions
+❌ Explanations with step-by-step instructions
+
+---
+
+TITLE: Documentation Type Quick Reference
+DESCRIPTION: Quick decision matrix for choosing documentation type
+SOURCE: divio-documentation-system.txt
+LANGUAGE: Reference Table
+CODE:
+| Type | User Says | You Write | Success = |
+|------|-----------|-----------|-----------|
+| Tutorial | "I want to learn" | Step-by-step lesson | Beginners complete it |
+| How-to | "I have a problem" | Problem-solving steps | Issue gets resolved |
+| Reference | "I need to look up X" | Technical specifications | Fast, accurate lookup |
+| Explanation | "I want to understand why" | Context and reasoning | Better comprehension |
+
+When to Use Each Type:
+
+User Need          | New Users      | Experienced Users
+-------------------|----------------|------------------
+Learning           | Tutorials      | How-to Guides
+Information Lookup | Explanation    | Reference
