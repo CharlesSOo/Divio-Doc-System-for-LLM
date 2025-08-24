@@ -1,26 +1,26 @@
 {
   "$schema": "https://github.com/upstash/context7/blob/main/packages/context7/schema/context7.schema.json",
-  "projectTitle": "Divio Documentation System (Diátaxis)",
-  "description": "A systematic approach to technical documentation with four quadrants: tutorials, how-to guides, reference, and explanation.",
+  "projectTitle": "Divio Documentation System Starter Kit",
+  "description": "Practical guide for organizing project documentation using the 4-quadrant framework. Perfect for early-to-mid stage projects.",
   "folders": [
     "."
   ],
   "excludeFolders": [],
   "excludeFiles": [
-    "*.md",
-    "README*",
-    "LICENSE*",
-    "CHANGELOG*"
+    "README.md"
   ],
   "rules": [
-    "Use the four-quadrant structure: tutorials (learning-oriented), how-to guides (goal-oriented), reference (information-oriented), and explanation (understanding-oriented)",
-    "Keep strict separation between documentation types - don't mix tutorials with reference material",
-    "Tutorials should be beginner-friendly with step-by-step instructions that always work",
-    "How-to guides solve specific problems for users with some experience",
-    "Reference documentation should be comprehensive, accurate, and structured around code organization",
-    "Explanation provides context, background, and the 'why' behind design decisions",
-    "Cross-link between quadrants appropriately but maintain type boundaries",
-    "Test tutorials with complete beginners to ensure they work reliably",
-    "Use consistent formatting and structure within each documentation type"
+    "Always separate documentation into exactly 4 types: tutorials, how-to guides, reference, and explanation",
+    "Never mix these types in the same document - each document serves only one purpose",
+    "Tutorials: Step-by-step instructions that get beginners from zero to working result",
+    "How-to guides: Solve specific problems for users with some experience",
+    "Reference: Technical lookup information - APIs, functions, configuration",
+    "Explanation: Context and 'why' behind design decisions and architecture",
+    "Use templates provided for each documentation type",
+    "Focus on practical implementation over theoretical completeness",
+    "Test tutorials with real beginners to ensure they work every time",
+    "Structure projects with clear folder separation: tutorials/, how-to/, reference/, explanation/",
+    "Start with audit → quick wins → build out phases",
+    "Measure success with completion rates, problem resolution, and user feedback"
   ]
 }
